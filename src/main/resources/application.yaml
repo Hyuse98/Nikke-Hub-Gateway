@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+      routes:
+        - id: nikke-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/nikke/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      register-with-eureka: true
+      fetch-registry: true
+      enabled: true
