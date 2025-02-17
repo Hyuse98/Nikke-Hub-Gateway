@@ -10,10 +10,14 @@ spring:
         locator:
           enabled: ${SPRING_CLOUD_GATEWAY_DISCOVERY_LOCATOR_ENABLED}
       routes:
-        - id: nikke-hub-backend
+        - id: nikkes
           uri: ${URI_BACKEND_SERVICE}
           predicates:
             - Path=/nikke/**
+        - id: dolls
+          uri: ${URI_BACKEND_SERVICE}
+          predicates:
+            - Path=/doll/**
 
 eureka:
   instance:
