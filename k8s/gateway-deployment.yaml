@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nikke-hub-gateway
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nikke-hub-gateway
+
+  template:
+    metadata:
+      labels:
+        app: nikke-hub-gateway
+
+    spec:
+      containers:
+        - name: nikke-hub-gateway
+          image: hyuse98/nikke-hub-gateway:latest
+          imagePullPolicy: Always #IfNotPresent
+
+          envFrom:
+            - configMapRef:
+                name: gateway-config
+
+          ports:
+            - containerPort: 8080
+
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
