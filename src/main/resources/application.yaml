@@ -14,10 +14,23 @@ spring:
           uri: ${URI_BACKEND_SERVICE}
           predicates:
             - Path=/nikke/**
+
         - id: dolls
           uri: ${URI_BACKEND_SERVICE}
           predicates:
             - Path=/doll/**
+
+        - id: eureka
+          uri: ${URI_EUREKA_SERVICE}
+          predicates:
+            - Path=/eureka/**
+
+        - id: config
+          uri: ${URI_CONFIG_SERVICE}
+          predicates:
+            - Path=/config/**
+          filters:
+            - RewritePath=/config/(?<remaining>.*), /$\{remaining}
 
 eureka:
   instance:
