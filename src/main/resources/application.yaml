@@ -32,6 +32,21 @@ spring:
           filters:
             - RewritePath=/config/(?<remaining>.*), /$\{remaining}
 
+        - id: grafana
+          uri: ${URI_GRAFANA}
+          predicates:
+            - Path=/grafana/**
+
+        - id: zipkin
+          uri: ${URI_ZIPKIN}
+          predicates:
+            - Path=/zipkin/**
+
+        - id: prometheus
+          uri: ${URI_PROMETHEUS}
+          predicates:
+            - Path=/prometheus/**
+
 eureka:
   instance:
     preferIpAddress: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS}
